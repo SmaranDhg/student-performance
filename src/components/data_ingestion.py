@@ -52,4 +52,4 @@ class DataIngestion:
 
 
 if __name__ == "__main__":
-    DataIngestion().initiate_data_ingestion()
+    DataIngestion().initiate()
