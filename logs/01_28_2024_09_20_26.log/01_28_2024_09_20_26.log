@@ -1,0 +1,9 @@
+[2024-01-28 09:20:26,477] [INFO] [data_ingestion:23] Entered the data ingestion method or component
+[2024-01-28 09:20:26,479] [INFO] [data_ingestion:26] Read the dataset as datagrame
+[2024-01-28 09:20:26,480] [INFO] [data_ingestion:33] Train test split initiated.
+[2024-01-28 09:20:26,482] [INFO] [data_ingestion:43] Ingestion of the data is completed.
+[2024-01-28 09:20:26,483] [INFO] [data_transformation:76] Read train and test data completed.
+[2024-01-28 09:20:26,483] [INFO] [data_transformation:78] Obtaining preprocessing object
+[2024-01-28 09:20:26,483] [INFO] [data_transformation:56] Numerical column encoding completed
+[2024-01-28 09:20:26,483] [INFO] [data_transformation:57] Categorical columns encoding completed.
+[2024-01-28 09:20:26,484] [INFO] [data_transformation:91] Applying preprocessing object on training dataframe and testing dataframe
