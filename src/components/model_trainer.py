@@ -32,7 +32,7 @@ from src.components.data_transformation import (
 )
 from src.exception import CustomeException
 from src.logger import logging
-from src.utils import save_object
+from src.utils import evaluate_models, save_object
 from typing import Dict, List
 
 
@@ -55,8 +55,8 @@ class ModelTrainer:
                 test_array[:, -1],
             )
             models = {
-                "Random Forest": RandomForestRegressor(),
                 "Decision Tree": DecisionTreeRegressor(),
+                "Random Forest": RandomForestRegressor(),
                 "Gradient Boosting": GradientBoostingRegressor(),
                 "Linear Regression": LinearRegression(),
                 "K-Neighbors Regressor": KNeighborsRegressor(),
@@ -65,12 +65,49 @@ class ModelTrainer:
                 "AdaBoost Regresssor": AdaBoostRegressor(),
             }
 
+            params = {
+                "Decision Tree": {
+                    "criterion": [
+                        "squared_error",
+                        "friedman_mse",
+                        "absolute_error",
+                        "poisson",
+                    ],
+                    "splitter": ["best", "random"],
+                    "max_features": ["sqrt", "log2"],
+                },
+                "Random Forest": {
+                    "n_estimators": [8, 16, 32, 64, 128, 256],
+                },
+                "Gradient Boosting": {
+                    "learning_rate": [0.1, 0.01, 0.05, 0.001],
+                    "subsample": [0.6, 0.7, 0.75, 0.8, 0.85, 0.9],
+                    "n_estimators": [8, 16, 32, 64, 128, 256],
+                },
+                "Linear Regression": {},
+                "K-Neighbors Regressor": {},
+                "XGB Regressor": {
+                    "learning_rate": [0.1, 0.01, 0.5, 0.001],
+                    "n_estimators": [8, 16, 32, 64, 128, 256],
+                },
+                "CatBoosting Regressor": {
+                    "depth": [6, 8, 10],
+                    "learning_rate": [0.01, 0.05, 0.1],
+                    "iterations": [30, 50, 100],
+                },
+                "AdaBoost Regresssor": {
+                    "learning_rate": [0.1, 0.01, 0.5, 0.001],
+                    "n_estimators": [8, 16, 32, 64, 128, 256],
+                },
+            }
+
             model_report: dict = evaluate_models(
                 X_train=X_train,
                 y_train=y_train,
                 X_test=X_test,
                 y_test=y_test,
                 models=models,
+                params=params,
             )
 
             ### To get best model score from dict
@@ -97,27 +134,11 @@ class ModelTrainer:
             predicted = best_model.predict(X_test)
 
             r2_square = r2_score(y_test, predicted)
+            logging.info(f"Best r2_square {r2_square}")
             return r2_square
 
         except Exception as e:
             raise CustomeException(e, sys)
-
-
-def evaluate_models(X_train, y_train, X_test, y_test, models: Dict):
-    reports = {}
-
-    for model_label, model in models.items():
-        model.fit(X_train, y_train)
-
-        y_train_pred = model.predict(X_train)
-        y_test_pred = model.predict(X_test)
-
-        train_model_score = r2_score(y_train, y_train_pred)
-        test_model_score = r2_score(y_test, y_test_pred)
-
-        reports[model_label] = test_model_score
-
-    return reports
 
 
 if __name__ == "__main__":

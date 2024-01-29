@@ -1,0 +1,13 @@
+[2024-01-28 20:55:19,715] [INFO] [data_ingestion:23] Entered the data ingestion method or component
+[2024-01-28 20:55:19,717] [INFO] [data_ingestion:26] Read the dataset as datagrame
+[2024-01-28 20:55:19,719] [INFO] [data_ingestion:33] Train test split initiated.
+[2024-01-28 20:55:19,721] [INFO] [data_ingestion:43] Ingestion of the data is completed.
+[2024-01-28 20:55:19,723] [INFO] [data_transformation:76] Read train and test data completed.
+[2024-01-28 20:55:19,723] [INFO] [data_transformation:78] Obtaining preprocessing object
+[2024-01-28 20:55:19,723] [INFO] [data_transformation:56] Numerical column encoding completed
+[2024-01-28 20:55:19,723] [INFO] [data_transformation:57] Categorical columns encoding completed.
+[2024-01-28 20:55:19,724] [INFO] [data_transformation:91] Applying preprocessing object on training dataframe and testing dataframe
+[2024-01-28 20:55:19,736] [INFO] [data_transformation:107] Saved preprocessing object.
+[2024-01-28 20:55:19,739] [INFO] [model_trainer:50] Split training and test input data.
+[2024-01-28 20:55:59,834] [INFO] [model_trainer:127] Best found model on both training and testing dataset.
+[2024-01-28 20:55:59,853] [INFO] [model_trainer:137] Best r2_square <function r2_score at 0x7f6e8e020af0>
